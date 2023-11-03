@@ -24,6 +24,7 @@ public class MyArrayList<T> {
 	}
 
 // TODO: read about "type erasure"
+// TODO: delete @SuppressWarnings
 	@SuppressWarnings("unchecked")
 	private void decreaseCapacity() {
 		int newCapacity = capacity / 2;
@@ -41,6 +42,25 @@ public class MyArrayList<T> {
 		capacity = newCapacity;
 	}
 
+	// stack overflow helper method for "boolean remove(T t)":
+	private void removeAt(int index) {
+		if (index < 0 || index >= size) {
+			throw new ArrayIndexOutOfBoundsException("Index out of bounds");
+		}
+
+		for (int i = index; i < size - 1; i++) {
+			array[i] = array[i + 1];
+		}
+
+		array[size - 1] = null;
+		size--;
+
+		if (size < capacity / 2) {
+			decreaseCapacity();
+		}
+	}
+
+	// when called, doubles the list capacity
 	private void increaseCapacity() {
 		capacity = capacity << 1;
 	}
@@ -83,7 +103,7 @@ public class MyArrayList<T> {
 	}
 
 	// Find index of array element
-	public int indexOf(T t) { 
+	public int indexOf(T t) {
 		for (int i = 0; i < size; i++) {
 			if (array[i] != null && array[i].equals(t)) { // check element(i) is not null and avoid exception:
 															// "NullPointerException"
@@ -94,65 +114,46 @@ public class MyArrayList<T> {
 	}
 
 	// Method just may show array size
-	public int size() { 
+	public int size() {
 		return size;
 	}
 
 	public boolean isEmpty() {
 		return size == 0; // true if size = 0 (array is empty) and false if array is not empty
-		}
+	}
 
 	// Does your MyArrayList contain the specified object o?
 	public boolean contains(Object o) {
-		for (int i = 0; i<size; i++) { // if object o = element with index '1', return true
+		for (int i = 0; i < size; i++) { // if object o = element with index '1', return true
 											// if o != element with index '1' , return false
-			if (o == null) {			// we checking if object o = null
+			if (o == null) { // we checking if object o = null
 				if (array[i] == null) {
 					return true;
 				}
 			} else if (o.equals(array[i])) {
-					return true;
-				}
+				return true;
 			}
-			return false;
 		}
-		
-
-
-	
-	// Delete 
-	public boolean remove(T t) {
-		
+		return false;
 	}
 
-	
-	
-//	public boolean remove(T t) {
-//	    for (int i = 0; i < size; i++) {
-//	        if (t == null) {
-//	            if (array[i] == null) {
-//	                removeAt(i);
-//	                return true;
-//	            }
-//	        } else if (t.equals(array[i])) {
-//	            removeAt(i);
-//	            return true;
-//	        }
-//	    }
-//	    return false;
-//	}
+	// Delete (remove)specified object o
+	public boolean remove(T t) {
+		for (int i = 0; i < size; i++) {
+			if (t == null) {
+				if (array[i] == null) {
+					removeAt(i);
+					return true;
+				}
+			} else if (t.equals(array[i])) {
+				removeAt(i);
+				return true;
+			}
+		}
+		return false;
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}
+
 	public boolean addAll(Collection c) {
 		throw new RuntimeException("Not implemented");
 	}
