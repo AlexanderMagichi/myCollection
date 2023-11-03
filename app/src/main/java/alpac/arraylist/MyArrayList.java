@@ -83,8 +83,17 @@ public class MyArrayList<T> {
 	}
 
 	public int indexOf(T t) { //Fiend index of array element 
-		throw new RuntimeException("Not implemented");
-	}
+		    for (int i = 0; i < size; i++) { 
+		        if (array[i] != null && array[i].equals(t)) { // check element(i) is not null and avoid exception: "NullPointerException"
+		            return i; // result if method true
+		        }
+		    }
+		    return -1; // result if method false
+		}
+
+	
+	
+	
 
 	public int size() {
 		return size;
