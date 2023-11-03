@@ -82,17 +82,19 @@ public class MyArrayList<T> {
 
 	}
 
-	public int indexOf(T t) { // Fiend index of array element
+	// Find index of array element
+	public int indexOf(T t) { 
 		for (int i = 0; i < size; i++) {
 			if (array[i] != null && array[i].equals(t)) { // check element(i) is not null and avoid exception:
 															// "NullPointerException"
-				return i; // result if method true
+				return i; // result if true
 			}
 		}
-		return -1; // result if method false
+		return -1; // result if false
 	}
 
-	public int size() { // Method may show array size
+	// Method just may show array size
+	public int size() { 
 		return size;
 	}
 
@@ -100,14 +102,57 @@ public class MyArrayList<T> {
 		return size == 0; // true if size = 0 (array is empty) and false if array is not empty
 		}
 
+	// Does your MyArrayList contain the specified object o?
 	public boolean contains(Object o) {
-		throw new RuntimeException("Not implemented");
-	}
+		for (int i = 0; i<size; i++) { // if object o = element with index '1', return true
+											// if o != element with index '1' , return false
+			if (o == null) {			// we checking if object o = null
+				if (array[i] == null) {
+					return true;
+				}
+			} else if (o.equals(array[i])) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
 
+
+	
+	// Delete 
 	public boolean remove(T t) {
-		throw new RuntimeException("Not implemented");
+		
 	}
 
+	
+	
+//	public boolean remove(T t) {
+//	    for (int i = 0; i < size; i++) {
+//	        if (t == null) {
+//	            if (array[i] == null) {
+//	                removeAt(i);
+//	                return true;
+//	            }
+//	        } else if (t.equals(array[i])) {
+//	            removeAt(i);
+//	            return true;
+//	        }
+//	    }
+//	    return false;
+//	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public boolean addAll(Collection c) {
 		throw new RuntimeException("Not implemented");
 	}
