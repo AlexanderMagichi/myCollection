@@ -23,6 +23,24 @@ public class MyArrayList<T> {
 		size++;
 	}
 
+// TODO: read about "type erasure"
+	@SuppressWarnings("unchecked")
+	private void decreaseCapacity() {
+		int newCapacity = capacity / 2;
+		Object[] tempArray = new Object[newCapacity];
+		for (int i = 0; i < size; i++) {
+			tempArray[i] = array[i];
+		}
+
+		T[] newArray = (T[]) java.lang.reflect.Array.newInstance(array.getClass().getComponentType(), newCapacity);
+		for (int i = 0; i < size; i++) {
+			newArray[i] = (T) tempArray[i];
+		}
+
+		array = newArray;
+		capacity = newCapacity;
+	}
+
 	private void increaseCapacity() {
 		capacity = capacity << 1;
 	}
@@ -43,10 +61,28 @@ public class MyArrayList<T> {
 	}
 
 	public T remove(int index) {
-		throw new RuntimeException("Not implemented");
+
+		if (index < 0 || index >= size) {
+			throw new ArrayIndexOutOfBoundsException("Index out of bounds"); // 1. check index in size[]
+		}
+		T removeElement = array[index]; // 2. save remove element in new array
+
+		for (int i = index; i < size - 1; i++) { // 3. move element left, i deleted (remove) element
+			array[i] = array[i + 1];
+		}
+
+		array[size - 1] = null; // 4. clear lust empty element after move elements (p.3)
+		size--;
+
+		if (size < capacity / 2) { // 5. if size < capacity more than, we change capacity (capacity/2)
+			decreaseCapacity(); // 6. add method decreaseCapacity (string 27)
+		}
+
+		return removeElement;
+
 	}
 
-	public int indexOf(T t) {
+	public int indexOf(T t) { //Fiend index of array element 
 		throw new RuntimeException("Not implemented");
 	}
 
