@@ -82,26 +82,23 @@ public class MyArrayList<T> {
 
 	}
 
-	public int indexOf(T t) { //Fiend index of array element 
-		    for (int i = 0; i < size; i++) { 
-		        if (array[i] != null && array[i].equals(t)) { // check element(i) is not null and avoid exception: "NullPointerException"
-		            return i; // result if method true
-		        }
-		    }
-		    return -1; // result if method false
+	public int indexOf(T t) { // Fiend index of array element
+		for (int i = 0; i < size; i++) {
+			if (array[i] != null && array[i].equals(t)) { // check element(i) is not null and avoid exception:
+															// "NullPointerException"
+				return i; // result if method true
+			}
 		}
+		return -1; // result if method false
+	}
 
-	
-	
-	
-
-	public int size() {
+	public int size() { // Method may show array size
 		return size;
 	}
 
 	public boolean isEmpty() {
-		throw new RuntimeException("Not implemented");
-	}
+		return size == 0; // true if size = 0 (array is empty) and false if array is not empty
+		}
 
 	public boolean contains(Object o) {
 		throw new RuntimeException("Not implemented");
