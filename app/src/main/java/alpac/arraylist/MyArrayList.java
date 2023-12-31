@@ -3,13 +3,14 @@ package alpac.arraylist;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
-
+	//Happy New Year 2024!
 public class MyArrayList<T> {
 
 	private T[] array;
 	private int capacity = 16;
 	private int size = 0;
 
+	@SuppressWarnings("unchecked")
 	public MyArrayList() {
 		array = (T[]) new Object[capacity];
 	}
